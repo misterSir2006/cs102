@@ -26,3 +26,4 @@ def group(values, n):
     return [ values[i*length // elemsInPart : (i+1)*length // elemsInPart] for i in range(elemsInPart)]
 
 print(group([1,2,3,4,5,6,7,8,9], 3))
+print("")
