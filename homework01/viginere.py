@@ -23,7 +23,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) ->str:
 
         if (a.islower()):
             ret = chr(97+(ord(a)-97+keyS)%26)
-        elif(b.isupper()):
+        elif(a.isupper()):
             ret = chr(65+(ord(a)-65+keyS)%26)
         return ret
 
@@ -53,19 +53,20 @@ def decrypt_vigenere(ciphertext:str, keyword:str)->str:
 
         if (d.islower()):
             keyS = ord(d)-97
-        elif(b.isupper()):
+        elif(d.isupper()):
             keyS = ord(d)-65
 
         if (c.islower()):
             ret = chr(97+(26+ord(c)-97-keyS)%26)
-        elif(a.isupper()):
+        elif(c.isupper()):
             ret = chr(65+(26+ord(c)-65-keyS)%26)
 
         return ret
 
 
-    for a in range(len(ciphertext)):
-        plaintext += decrypt(ciphertext[a],keyword[a%len(keyword)])
+    for c in range(len(ciphertext)):
+        plaintext += decrypt(ciphertext[c],keyword[c%len(keyword)])
     return plaintext
+
 
 
