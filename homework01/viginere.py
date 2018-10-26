@@ -7,9 +7,8 @@ def encrypt_vigenere(plaintext: str, keyword: str) ->str:
     >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
     'LXFOPVEFRNHR'
     """
-    # PUT YOUR CODE HERE
 
-    ciphertext= "";
+    ciphertext= ""
 
     def encrypt(a:str,b:str)->str:
 
@@ -42,9 +41,8 @@ def decrypt_vigenere(ciphertext:str, keyword:str)->str:
     >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
     'ATTACKATDAWN'
     """
-    # PUT YOUR CODE HERE
 
-    plaintext= "";
+    plaintext= ""
 
     def decrypt(c:str,d:str)->str:
 
