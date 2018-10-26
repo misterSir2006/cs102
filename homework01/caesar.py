@@ -1,9 +1,7 @@
-import string
-
-plaintext = input("Введите строку, которую хотите зашифровать - ")
-
-def encrypt_caesar(govn: str) -> str:
+def encrypt_caesar(plaintext: str) -> str:
     """
+    Encrypts plaintext using a Caesar cipher.
+
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
     >>> encrypt_caesar("python")
@@ -13,70 +11,38 @@ def encrypt_caesar(govn: str) -> str:
     >>> encrypt_caesar("")
     ''
     """
-    word = []
-
-    for i in range (0, len(govn)):
-        word.append(govn[i])
-    
-    for i in range (0, len(govn)):
-        if word[i] == "z":
-            word[i] = "c"
-        elif word[i] == "y":
-            word[i] = "b"
-        elif word[i] == "x":
-            word[i] = "a"
-        elif word[i] == "Z":
-            word[i] = "C"
-        elif word[i] == "Y":
-            word[i] = "B"
-        elif word[i] == "X":
-            word[i] = "A"
-        elif ord(word[i]) >= 65 and ord(word[i]) <= 90 or ord(word[i]) >= 97 and ord(word[i]) <= 122:
-            word[i] = chr(ord(word[i]) + 3)
-
-    ciphertext = ""
-    for i in range (0, len(govn)):
-        ciphertext += word[i]
+    ciphertext = ''
+    for govn in plaintext:
+        if ('a' <= govn <= 'z') or ('A' <= govn <= 'Z'):
+            anus = ord(govn) + 3
+            if (anus > ord('Z')) and (anus < ord('a')) or (anus > ord('z')):
+                anus -= 26
+            ciphertext += chr(anus)
+        else:
+            ciphertext += govn
     return ciphertext
 
-def decrypt_caesar(govn: str) -> str:
+
+def decrypt_caesar(ciphertext: str) -> str:
     """
-    >>> decrypt_caesar("SBWKRQ", 3)
+    Decrypts a ciphertext using a Caesar cipher.
+
+    >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
-    >>> decrypt_caesar("sbwkrq", 3)
+    >>> decrypt_caesar("sbwkrq")
     'python'
-    >>> decrypt_caesar("Sbwkrq3.6", 3)
+    >>> decrypt_caesar("Sbwkrq3.6")
     'Python3.6'
-    >>> decrypt_caesar("", 3)
+    >>> decrypt_caesar("")
     ''
     """
-
-    word = []
-    
-    for i in range (0, len(govn)):
-        word.append(govn[i])
-    
-    for i in range (0, len(govn)):
-        if word[i] == "c":
-            word[i] = "z"
-        elif word[i] == "b":
-            word[i] = "y"
-        elif word[i] == "a":
-            word[i] = "x"
-        elif word[i] == "C":
-            word[i] = "Z"
-        elif word[i] == "B":
-            word[i] = "Y"
-        elif word[i] == "A":
-            word[i] = "X"
-        elif ord(word[i]) >= 65 and ord(word[i]) <= 90 or ord(word[i]) >= 97 and ord(word[i]) <= 122:
-            word[i] = chr(ord(word[i]) - 3)
-
-    ciphertext = ""
-    for i in range (0, len(govn)):
-        ciphertext += word[i]
-    return ciphertext
-
-print("Ваша зашифрованная строка - ", encrypt_caesar(plaintext))
-decode = input("Введите строку, которую хотите расшифровать - ")
-print("Ваша расшифрованная строка - ", decrypt_caesar(decode))
+    plaintext = ''
+    for govn in ciphertext:
+        if ('a' <= govn <= 'z') or ('A' <= govn <= 'Z'):
+            anus = ord(govn) - 3
+            if (anus < ord('a')) and (anus > ord('Z')) or (anus < ord('A')):
+                anus += 26
+            plaintext += chr(anus)
+        else:
+            plaintext += govn
+    return plaintext
