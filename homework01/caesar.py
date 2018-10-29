@@ -12,14 +12,14 @@ def encrypt_caesar(plaintext: str) -> str:
     ''
     """
     ciphertext = ''
-    for govn in plaintext:
-        if ('a' <= govn <= 'z') or ('A' <= govn <= 'Z'):
-            anus = ord(govn) + 3
-            if (anus > ord('Z')) and (anus < ord('a')) or (anus > ord('z')):
-                anus -= 26
-            ciphertext += chr(anus)
+    for ab in plaintext:
+        if ('a' <= ab <= 'z') or ('A' <= ab <= 'Z'):
+            ans = ord(ab) + 3
+            if (ans > ord('Z')) and (ans < ord('a')) or (ans > ord('z')):
+                ans -= 26
+            ciphertext += chr(ans)
         else:
-            ciphertext += govn
+            ciphertext += ab
     return ciphertext
 
 
@@ -37,12 +37,12 @@ def decrypt_caesar(ciphertext: str) -> str:
     ''
     """
     plaintext = ''
-    for govn in ciphertext:
-        if ('a' <= govn <= 'z') or ('A' <= govn <= 'Z'):
-            anus = ord(govn) - 3
-            if (anus < ord('a')) and (anus > ord('Z')) or (anus < ord('A')):
-                anus += 26
-            plaintext += chr(anus)
+    for ab in ciphertext:
+        if ('a' <= ab <= 'z') or ('A' <= ab <= 'Z'):
+            ans = ord(ab) - 3
+            if (ans < ord('a')) and (ans > ord('Z')) or (ans < ord('A')):
+                ans += 26
+            plaintext += chr(ans)
         else:
-            plaintext += govn
+            plaintext += ab
     return plaintext
