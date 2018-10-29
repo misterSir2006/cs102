@@ -47,13 +47,13 @@ def get_row(values, pos):
     >>> get_row([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (2, 0))
     ['.', '8', '9']
     """
-    gridGovna = read_sudoku("puzzle1.txt")
+    gridRead = read_sudoku("puzzle1.txt")
     rowNumber, colNumber = pos
 
-    row = gridGovna[rowNumber] 
+    row = gridRead[rowNumber] 
     return row
-gridGovna = read_sudoku("puzzle1.txt")
-print (get_row(gridGovna, (8, 0)))
+gridRead = read_sudoku("puzzle1.txt")
+print (get_row(gridRead, (8, 0)))
 
 
 
@@ -66,14 +66,14 @@ def get_col(values, pos):
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
     """
-    gridGovna = read_sudoku("puzzle1.txt")
+    gridRead = read_sudoku("puzzle1.txt")
     rowNumber, colNumber = pos
     col = []
 
     for i in range(9):
-        col.append(gridGovna[i][colNumber])
+        col.append(gridRead[i][colNumber])
     return col
-print(get_col(gridGovna, (0, 0)))
+print(get_col(gridRead, (0, 0)))
 
 
 
@@ -91,35 +91,35 @@ def get_block(values, pos):
     row, col = pos
     blockList = []
     if (row == 0 or row == 1 or row == 2)  and (col == 0 or col == 1 or col == 2):
-        blockList = (gridGovna[0][0:3] + gridGovna[1][0:3] + gridGovna[2][0:3])
+        blockList = (gridRead[0][0:3] + gridRead[1][0:3] + gridRead[2][0:3])
         
     elif (row == 3 or row == 4 or row == 5) and (col == 0 or col == 1 or col == 2):
-        blockList = (gridGovna[0][3:6] + gridGovna[1][3:6] + gridGovna[2][3:6])
+        blockList = (gridRead[0][3:6] + gridRead[1][3:6] + gridRead[2][3:6])
         
     elif (row == 6 or row == 7 or row == 8) and (col == 0 or col == 1 or col == 2):
-        blockList = (gridGovna[0][6:9] + gridGovna[1][6:9] + gridGovna[2][6:9])
+        blockList = (gridRead[0][6:9] + gridRead[1][6:9] + gridRead[2][6:9])
         
     elif (row == 0 or row == 1 or row == 2) and (col == 3 or col == 4 or col == 5):
-        blockList = (gridGovna[3][0:3] + gridGovna[4][0:3] + gridGovna[5][0:3])
+        blockList = (gridRead[3][0:3] + gridRead[4][0:3] + gridRead[5][0:3])
 
     elif (row == 3 or row == 4 or row == 5) and (col == 3 or col == 4 or col == 5):
-        blockList = (gridGovna[3][3:6] + gridGovna[4][3:6] + gridGovna[5][3:6])
+        blockList = (gridRead[3][3:6] + gridRead[4][3:6] + gridRead[5][3:6])
 
     elif (row == 6 or row == 7 or row == 8) and (col == 3 or col == 4 or col == 5):
-        blockList = (gridGovna[3][6:9] + gridGovna[4][6:9] + gridGovna[5][6:9])
+        blockList = (gridRead[3][6:9] + gridRead[4][6:9] + gridRead[5][6:9])
   
     elif (row == 0 or row == 1 or row == 2) and (col == 6 or col == 7 or col == 8):
-        blockList = (gridGovna[6][0:3] + gridGovna[7][0:3] + gridGovna[8][0:3])
+        blockList = (gridRead[6][0:3] + gridRead[7][0:3] + gridRead[8][0:3])
  
     elif (row == 3 or row == 4 or row == 5) and (col == 6 or col == 7 or col == 8):
-        blockList = (gridGovna[6][3:6] + gridGovna[7][3:6] + gridGovna[8][3:6])
+        blockList = (gridRead[6][3:6] + gridRead[7][3:6] + gridRead[8][3:6])
         
     elif (row == 6 or row == 7 or row == 8) and (col == 6 or col == 7 or col == 8):
-        blockList = (gridGovna[6][6:9] + gridGovna[7][6:9] + gridGovna[8][6:9])
+        blockList = (gridRead[6][6:9] + gridRead[7][6:9] + gridRead[8][6:9])
         
     return blockList
 
-print(get_block(gridGovna, (8, 6)))
+print(get_block(gridRead, (8, 6)))
 
 
 def find_empty_positions(grid):
@@ -132,12 +132,12 @@ def find_empty_positions(grid):
     >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
-    for i in range(len(gridGovna)):
-        for j in range(len(gridGovna)):
-             if gridGovna[i][j] == '.':
+    for i in range(len(gridRead)):
+        for j in range(len(gridRead)):
+             if gridRead[i][j] == '.':
                  return i, j
 
 print("\n")
-print(find_empty_positions(gridGovna))
+print(find_empty_positions(gridRead))
 
 
