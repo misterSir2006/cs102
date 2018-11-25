@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-
+from copy import deepcopy
 
 class GameOfLife:
 
@@ -31,32 +31,30 @@ class GameOfLife:
             pygame.draw.line(self.screen, pygame.Color('black'),
                     (0, y), (self.width, y))
 
-    def run(self):
+    def run(self) -> None:
         """ Запустить игру """
         pygame.init()
         clock = pygame.time.Clock()
         pygame.display.set_caption('Game of Life')
         self.screen.fill(pygame.Color('white'))
 
-        # Создание списка клеток
-        # PUT YOUR CODE HERE
+        self.clist = self.cell_list()
 
         running = True
         while running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     running = False
+
             self.draw_grid()
-
-            # Отрисовка списка клеток
-            # Выполнение одного шага игры (обновление состояния ячеек)
-            # PUT YOUR CODE HERE
-
+            self.draw_cell_list(self.clist)
+            self.clist = self.update_cell_list(self.clist)
+            
             pygame.display.flip()
             clock.tick(self.speed)
         pygame.quit()
 
-    def cell_list(self, randomize=True):
+    def cell_list(self, randomize=True) -> list:
         """ Создание списка клеток.
 
         :param randomize: Если True, то создается список клеток, где
@@ -64,27 +62,51 @@ class GameOfLife:
         :return: Список клеток, представленный в виде матрицы
         """
         self.clist = []
-        # PUT YOUR CODE HERE
+        self.clist = [[1 for i in range(self.cell_width)] for j in range(self.cell_height)]
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                if randomize:
+                    self.clist[i][j] = random.choice([0,1]) 
+
+        
         return self.clist
 
-    def draw_cell_list(self, clist):
+    def draw_cell_list(self, clist: list):
         """ Отображение списка клеток
 
         :param rects: Список клеток для отрисовки, представленный в виде матрицы
         """
-        pass
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                x = j * self.cell_size + 1
+                y = i * self.cell_size + 1
+                a = self.cell_size - 1
+                b = self.cell_size - 1
+                if clist[i][j] == 1:
+                    pygame.draw.rect(self.screen_size, pygame.Color('green'), (x, y, a, b))
+                else:
+                    pygame.draw.rect(self.screen_size, pygame.Color('white'), (x, y, a, b))
 
-    def get_neighbours(self, cell):
+    def get_neighbours(self, cell: tuple) -> list:
         """ Вернуть список соседей для указанной ячейки
 
         :param cell: Позиция ячейки в сетке, задается кортежем вида (row, col)
         :return: Одномерный список ячеек, смежных к ячейке cell
         """
         neighbours = []
-        # PUT YOUR CODE HERE
+        row, col = cell
+        n = self.cell_height - 1
+        p = self.cell_width - 1
+        
+        for i in range(row - 1, row + 2):
+            for j in range(col - 1, col + 2):
+                if not (0 <= i <= n and 0 <= j <= p) or (i == row and j == col):
+                    continue
+                neighbours.append(self.clist[i][j])
+        
         return neighbours
 
-    def update_cell_list(self, cell_list):
+    def update_cell_list(self, cell_list: list) -> list:
         """ Выполнить один шаг игры.
 
         Обновление всех ячеек происходит одновременно. Функция возвращает
@@ -93,6 +115,19 @@ class GameOfLife:
         :param cell_list: Игровое поле, представленное в виде матрицы
         :return: Обновленное игровое поле
         """
-        new_clist = []
-        # PUT YOUR CODE HERE
-        return self.clist
+        new_clist = copy.deepcopy(self.clist)
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                E = sum(self.get_neighbours((i, j)) )
+                if self.clist[i][j]:
+                    if k == 3:
+                        new_clist[i][j] == 1
+                    else:
+                        if k < 2 or k > 3:
+                            new_clist[i][j] == 0
+
+        return new_clist
+
+    if __name__ == '__main__':
+        game = GameOfLife(320, 240, 20)
+        game.run()
