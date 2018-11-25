@@ -116,14 +116,13 @@ class GameOfLife:
         new_clist = deepcopy(self.clist)
         for i in range(self.cell_height):
             for j in range(self.cell_width):
-                E = sum(self.get_neighbours((i, j)) )
-                if self.clist[i][j]:
-                    if E == 3:
-                        new_clist[i][j] == 1
-                    else:
-                        if E < 2 or E > 3:
-                            new_clist[i][j] == 0
-
+                if sum(self.get_neighbours((i, j))) == 2:
+                    pass
+                elif sum(self.get_neighbours((i, j))) == 3:
+                    new_clist[i][j] = 1
+                else:
+                    new_clist[i][j] = 0
+        self.clist = new_clist
         return new_clist
 
 if __name__ == '__main__':
