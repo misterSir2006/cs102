@@ -61,14 +61,12 @@ class GameOfLife:
         каждая клетка равновероятно может быть живой (1) или мертвой (0).
         :return: Список клеток, представленный в виде матрицы
         """
-        self.clist = []
-        self.clist = [[1 for i in range(self.cell_width)] for j in range(self.cell_height)]
+        self.clist = [[0 for i in range(self.cell_width)] for j in range(self.cell_height)]
         for i in range(self.cell_height):
             for j in range(self.cell_width):
                 if randomize:
                     self.clist[i][j] = random.choice([0,1]) 
 
-        
         return self.clist
 
     def draw_cell_list(self, clist: list):
@@ -83,9 +81,9 @@ class GameOfLife:
                 a = self.cell_size - 1
                 b = self.cell_size - 1
                 if clist[i][j] == 1:
-                    pygame.draw.rect(self.screen_size, pygame.Color('green'), (x, y, a, b))
+                    pygame.draw.rect(self.screen, pygame.Color('green'), (x, y, a, b))
                 else:
-                    pygame.draw.rect(self.screen_size, pygame.Color('white'), (x, y, a, b))
+                    pygame.draw.rect(self.screen, pygame.Color('white'), (x, y, a, b))
 
     def get_neighbours(self, cell: tuple) -> list:
         """ Вернуть список соседей для указанной ячейки
@@ -115,19 +113,19 @@ class GameOfLife:
         :param cell_list: Игровое поле, представленное в виде матрицы
         :return: Обновленное игровое поле
         """
-        new_clist = copy.deepcopy(self.clist)
+        new_clist = deepcopy(self.clist)
         for i in range(self.cell_height):
             for j in range(self.cell_width):
                 E = sum(self.get_neighbours((i, j)) )
                 if self.clist[i][j]:
-                    if k == 3:
+                    if E == 3:
                         new_clist[i][j] == 1
                     else:
-                        if k < 2 or k > 3:
+                        if E < 2 or E > 3:
                             new_clist[i][j] == 0
 
         return new_clist
 
-    if __name__ == '__main__':
-        game = GameOfLife(320, 240, 20)
-        game.run()
+if __name__ == '__main__':
+    game = GameOfLife(320, 240, 20)
+    game.run()
