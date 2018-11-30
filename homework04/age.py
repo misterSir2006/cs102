@@ -6,7 +6,7 @@ import datetime
 from api import get_friends
 from api_models import User
 
-
+user_id = int(input('Введите id - '))
 
 def age_predict(user_id: int) -> Optional[float]:
     """ Наивный прогноз возраста по возрасту друзей
@@ -45,5 +45,8 @@ def age_predict(user_id: int) -> Optional[float]:
         else:
             return int((friendsAges[len(friendsAges) // 2 - 1] + friendsAges[len(friendsAges) // 2]) / 2)
     else:
-        return 0
+        return None
+
+if __name__ == '__main__':
+	print('Средний возраст  - ', age_predict(user_id))
 
