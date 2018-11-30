@@ -1,7 +1,7 @@
 import requests
 import time
 
-access_token = 'cb2269f38631690fd4bdabdb5650960a373d9b1d51dae4204560639e4cb38c91604a090c1b074a9d57043'
+access_token = 'f3e21bb84e6e96e05b0c5182076832179e67007ea7c6eeb9468f4e7b31cafb71e756d127b55ce8e43947c'
 user_id = '249735203'
 url = 'https://api.vk.com/method'
 
@@ -15,7 +15,6 @@ def get(params={}, timeout=5, max_retries=5, backoff_factor=0.3) -> dict:
     :param backoff_factor: коэффициент экспоненциального нарастания задержки
     """
     
-
     params = {
     'url': url,
     'access_token': access_token,
@@ -40,7 +39,7 @@ def get_friends(user_id: int, fields = '') -> dict:
     query_params = {
     'url': url,
     'access_token': access_token,
-    'v': '5.53',
+    'v': '5.87',
     'user_id': user_id,
     'fields': fields
     }
@@ -79,7 +78,7 @@ def messages_get_history(user_id: int, offset=0, count=20) -> dict:
     
     while count > 0:
         query2 = "{url}/messages.getHistory?access_token={access_token}&user_id={user_id}&offset={offset}&count={count}&v={v}".format(**query_params)
-        response2 = requests.get(query)
+        response2 = requests.get(query2)
         data2 = response2.json()
         messages.extend(data2['response']['items'])
         count -= min(count, max_count)
@@ -87,5 +86,3 @@ def messages_get_history(user_id: int, offset=0, count=20) -> dict:
         query_params['count'] = min(count, max_count)
 
     return messages
-
-print(messages_get_history(249735203, 0, 20))
