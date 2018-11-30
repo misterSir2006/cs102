@@ -18,4 +18,10 @@ class User(BaseUser):
 
 class Message(BaseModel):
     """ Модель сообщения """
-    # PUT YOUR CODE HERE
+    id: int
+    body: Optional[str]
+    user_id: Optional[str]
+    date: float
+    read_state: Optional[int]
+    out: int
+    attachments: Optional[list]
