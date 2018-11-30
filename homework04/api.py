@@ -1,8 +1,8 @@
 import requests
 import time
 
-access_token = 'f3e21bb84e6e96e05b0c5182076832179e67007ea7c6eeb9468f4e7b31cafb71e756d127b55ce8e43947c'
-user_id = '249735203'
+access_token = 'e25b4ead79df072bb7c0239adc60182d1a2c17c1a7848d7bdbace7d09584980ded089ca51bf6a3bd8c421'
+user_id = '218902184'
 url = 'https://api.vk.com/method'
 
 def get(params={}, timeout=5, max_retries=5, backoff_factor=0.3) -> dict:
@@ -19,10 +19,9 @@ def get(params={}, timeout=5, max_retries=5, backoff_factor=0.3) -> dict:
     'url': url,
     'access_token': access_token,
     'user_id': user_id,
-    'fields': 'bdate'
     }
 
-    query = "{url}/friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&v=5.53".format(**params)
+    query = "{url}/friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&v=5.87".format(**params)
     response = requests.get(query)
     return response
 
@@ -39,12 +38,11 @@ def get_friends(user_id: int, fields = '') -> dict:
     query_params = {
     'url': url,
     'access_token': access_token,
-    'v': '5.87',
     'user_id': user_id,
     'fields': fields
     }
 
-    query = "{url}/friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&v=5.53".format(**query_params)
+    query = "{url}/friends.get?access_token={access_token}&user_id={user_id}&fields={fields}&v=5.87".format(**query_params)
     response = requests.get(query)
     return response.json()
 
@@ -65,7 +63,7 @@ def messages_get_history(user_id: int, offset=0, count=20) -> dict:
     query_params = {
     'url': url,
     'access_token': access_token,
-    'v': '5.53',
+    'v': '5.87',
     'user_id': user_id,
     'offset': offset,
     'count': min(count, max_count)
