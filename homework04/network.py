@@ -1,6 +1,6 @@
 from api import get_friends
 import time
-import jgraph
+import igraph
 
 def get_network(users_id:int, as_edgelist=True) -> list:
     users_ids = get_friends(user_id)['response']['items']

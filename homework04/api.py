@@ -1,7 +1,7 @@
 import requests
 import time
 
-access_token = 'e25b4ead79df072bb7c0239adc60182d1a2c17c1a7848d7bdbace7d09584980ded089ca51bf6a3bd8c421'
+access_token = '6028e6dca1a67473b85be2fe56ac79d3e7349d955eca2d3458e95e4bc7c3af0624e9ac7c67cf064a5bb58'
 user_id = '218902184'
 url = 'https://api.vk.com/method'
 
